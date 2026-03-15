@@ -19,10 +19,17 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp(){
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless"); 
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--window-size=1920,1080");
+
+        driver = new ChromeDriver(options); // Truyền options vào ChromeDriver
         driver.navigate().to("https://automationexercise.com/");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         homePage = new HomePage(driver);
+        handleGoogleAdIfNeeded(); 
     }
 
     @AfterMethod
