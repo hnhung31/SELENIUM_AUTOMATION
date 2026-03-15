@@ -15,8 +15,7 @@ import java.time.Duration;
 
 public class BaseTest {
     public WebDriver driver;
-    HomePage homePage;
-
+    public WebDriverWait wait;
 
     @BeforeMethod
     public void setUp(){
@@ -24,12 +23,12 @@ public class BaseTest {
         options.addArguments("--headless"); 
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--window-size=1920,1080");
-
-        driver = new ChromeDriver(options); // Truyền options vào ChromeDriver
-        driver.navigate().to("https://automationexercise.com/");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        homePage = new HomePage(driver);
+        options.addArguments("--window-size=1920,1080"); // Thêm kích thước cửa sổ
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+        driver.get("https://automationexercise.com/");
+        // Khởi tạo WebDriverWait với thời gian chờ 20 giây
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         handleGoogleAdIfNeeded(); 
     }
 
