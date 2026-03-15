@@ -7,7 +7,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <aspectj.version>1.9.20.1</aspectj.version> <!-- Dòng quan trọng nhất -->
+        <aspectj.version>1.9.22</aspectj.version> <!-- Dòng quan trọng nhất -->
     </properties>
   <dependencies>
     <dependency>
