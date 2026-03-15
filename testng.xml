@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="AutomationExercise Suite">
+    <test verbose="2" preserve-order="true" name="All Test Cases">
+        <classes>
+            <class name="testCases.CartTest"/>
+            <class name="testCases.CategoryTest"/>
+            <class name="testCases.ContactUsTest"/>
+            <class name="testCases.HomeTest"/>
+            <class name="testCases.LoginTest"/>
+            <class name="testCases.LogOutTest"/>
+            <class name="testCases.OrderTest"/>
+            <class name="testCases.ProductTest"/>
+            <class name="testCases.ProductViewDetailTest"/>
+            <class name="testCases.RegisterTest"/>
+            <class name="testCases.TestcaseTest"/>
+        </classes>
+    </test>
+</suite>
