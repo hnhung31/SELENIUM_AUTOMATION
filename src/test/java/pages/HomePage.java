@@ -149,15 +149,17 @@ public class HomePage {
     public void clickScrollUpButton(){
         driver.findElement(btnScrollUp).click();
     }
+
     public void scrollToBottom() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-
-        try { Thread.sleep(1000); } catch (InterruptedException e) {}
     }
+    
     public void clickScrollUpArrow() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement arrow = wait.until(ExpectedConditions.elementToBeClickable(btnScrollUp));
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", driver.findElement(btnScrollUp));
+        js.executeScript("arguments[0].click();", arrow);
     }
 
     public void scrollToTopWithoutArrow() {
@@ -166,11 +168,8 @@ public class HomePage {
     }
 
     public boolean isTopTextVisible() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        try { Thread.sleep(1500); } catch (InterruptedException e) {}
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(txtFullFledged));
-        return driver.findElement(txtFullFledged).isDisplayed();
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+    return wait.until(ExpectedConditions.visibilityOfElementLocated(txtFullFledged)).isDisplayed();
     }
 
 
