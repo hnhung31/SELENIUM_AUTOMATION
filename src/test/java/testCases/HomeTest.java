@@ -26,13 +26,11 @@ public class HomeTest extends BaseTest {
         HomePage homePage = new HomePage(driver);
 
         homePage.scrollToBottom();
-
         homePage.scrollToTopWithoutArrow();
 
         Assert.assertTrue(
-                homePage.isTopTextVisible(),
-                "Lỗi: Code cuộn lên thất bại, không thấy text ở đỉnh trang!"
+            homePage.isAtTopOfPage(),
+            "Scroll to top thất bại!"
         );
-        System.out.println("Test Case 26 Passed: Script cuộn trang hoạt động tốt!");
     }
 }

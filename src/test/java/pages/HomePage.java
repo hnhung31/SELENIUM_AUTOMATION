@@ -162,15 +162,25 @@ public class HomePage {
         js.executeScript("arguments[0].click();", arrow);
     }
 
-    public void scrollToTopWithoutArrow() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollTo(0, 0)");
-    }
+
+    public boolean isAtTopOfPage() {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+
+    Long scrollPosition = (Long) js.executeScript(
+            "return window.pageYOffset;"
+    );
+
+    return scrollPosition == 0;
+}
 
     public boolean isTopTextVisible() {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
     return wait.until(ExpectedConditions.visibilityOfElementLocated(txtFullFledged)).isDisplayed();
     }
+    public void scrollToTopWithoutArrow() {
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    js.executeScript("window.scrollTo(0, 0)");
+}
 
 
 
