@@ -17,7 +17,6 @@ import java.time.Duration;
 public class CategoryTest extends BaseTest {
     @Test
     public void viewCategoryProducts(){
-        HomePage homePage = new HomePage(driver);
         handleGoogleAdIfNeeded();
         Assert.assertTrue(homePage.isDisplayedCategory(),"Khong hien thi sidebar category");
         handleGoogleAdIfNeeded();

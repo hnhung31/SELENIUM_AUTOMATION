@@ -18,14 +18,12 @@ import java.time.Duration;
 public class ProductTest extends BaseTest {
     @Test
     public void viewAllProductSuccessful(){
-        HomePage homePage = new HomePage(driver);
         ProductPage productPage = homePage.clickProductButton();
         Assert.assertTrue(productPage.isDisplayAllProduct(),"Khong hien thi san pham");
     }
 
     @Test
     public void chooseProductByIndex(){
-        HomePage homePage = new HomePage(driver);
         ProductPage productPage = homePage.clickProductButton();
         productPage.viewProduct(0);
 
@@ -33,10 +31,8 @@ public class ProductTest extends BaseTest {
 
     @Test
     public void viewProductDetailByDynamicXPath(){
-        HomePage homePage = new HomePage(driver);
-        ProductPage productPage = homePage.clickProductButton();
-        productPage.ProductViewDetailByXPathDynamic("Fancy Green Top");
-
+        homePage.clickProductButton()
+                .ProductViewDetailByXPathDynamic("Fancy Green Top");
     }
 
     /*@Test
@@ -51,7 +47,6 @@ public class ProductTest extends BaseTest {
 
     @Test
     public void ViewCartBrandProducts(){
-        HomePage homePage = new HomePage(driver);
         ProductPage productPage = homePage.clickProductButton();
         handleGoogleAdIfNeeded();
         CategoryProductPage categoryProductPage= productPage.locateAndClickBrandProduct("Biba");

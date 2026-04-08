@@ -85,7 +85,10 @@ public class ProductPage {
     }
     public void continueShopping(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(popUpAdded));
-        wait.until(ExpectedConditions.elementToBeClickable(btnContinueShopping)).click();
+        WebElement btnShop = wait.until(ExpectedConditions.elementToBeClickable(btnContinueShopping));
+        
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", btnShop); // Dùng JS để click xuyên màng quảng cáo
     }
     public CartPage moveToCartPage(){
         WebElement viewCartBtn = wait.until(ExpectedConditions.presenceOfElementLocated(lnkViewCart));

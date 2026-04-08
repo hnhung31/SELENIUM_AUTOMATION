@@ -12,12 +12,11 @@ public class LogOutTest extends BaseTest {
 
         @Test
         public void LogOut(){
-            HomePage homePage = new HomePage(driver);
             User user = new User("nhung@gmail.com", "1234567890");
-            LoginPage loginPage = homePage.clickLoginPage();
-            HomePage homePage1=  loginPage.loginAction(user);
-            Assert.assertTrue(homePage1.isDisplayedUser());
-            LoginPage t = homePage1.logOutAction();
+            Assert.assertTrue(homePage.clickLoginPage()
+                                        .loginAction(user)
+                                        .isDisplayedUser());
+            LoginPage t = homePage.logOutAction();
             handleGoogleAdIfNeeded();
             Assert.assertTrue(t.containLabelLogin(),"Khong the dang xuat");
         }

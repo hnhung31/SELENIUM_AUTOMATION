@@ -8,8 +8,6 @@ import pages.HomePage;
 public class HomeTest extends BaseTest {
     @Test
     public void testScrollUpUsingArrowButton() {
-        HomePage homePage = new HomePage(driver);
-
         homePage.scrollToBottom();
 
         homePage.clickScrollUpArrow();
@@ -23,8 +21,6 @@ public class HomeTest extends BaseTest {
 
     @Test
     public void testScrollUpWithoutArrowButton() {
-        HomePage homePage = new HomePage(driver);
-
         homePage.scrollToBottom();
         homePage.scrollToTopWithoutArrow();
 

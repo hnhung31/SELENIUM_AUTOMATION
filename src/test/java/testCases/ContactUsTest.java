@@ -16,7 +16,6 @@ public class ContactUsTest extends BaseTest {
     String absolutePath = uploadFile.getAbsolutePath();
     @Test
     public void sendFeedbackSuccessful(){
-        HomePage homePage = new HomePage(driver);
         ContactUs contactUs = new ContactUs("h","abcd@gnhm","hhh","hhh",absolutePath);
         ContactUsPage contact = homePage.clickContactUs();
         handleGoogleAdIfNeeded();

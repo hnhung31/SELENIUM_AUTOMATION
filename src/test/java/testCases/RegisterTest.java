@@ -32,7 +32,6 @@ public class RegisterTest extends BaseTest {
     }
     @Test
     public void testRegisterWithEmailExist(){
-        HomePage homePage = new HomePage(driver);
         homePage.clickLoginPage();
 
     }

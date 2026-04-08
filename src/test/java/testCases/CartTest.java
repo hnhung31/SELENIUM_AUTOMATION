@@ -17,7 +17,6 @@ import java.time.Duration;
 public class CartTest extends BaseTest {
     @Test
     public void SendSubscriptionEmail(){
-        HomePage homePage = new HomePage(driver);
         CartPage cartPage= homePage.clickCartButton();
         cartPage.SubscriptionEmail("h@gmail.com");
         Assert.assertEquals(cartPage.isDisplayedNotiSuccessful(),"You have been successfully subscribed!","Dang ki khong thanh cong");
@@ -25,7 +24,6 @@ public class CartTest extends BaseTest {
 
     @Test
     public void AddProductInCart(){
-        HomePage homePage = new HomePage(driver);
         ProductPage productPage = homePage.clickProductButton();
         handleGoogleAdIfNeeded();
         productPage.hoverAndClickAddProduct(2);
@@ -49,7 +47,6 @@ public class CartTest extends BaseTest {
     @Test
     public void removeProductsFromCart(){
         User user = new User("nhung@gmail.com","1234567890");
-        HomePage homePage = new HomePage(driver);
         ProductPage productPage = homePage.clickProductButton();
         handleGoogleAdIfNeeded();
         productPage.hoverAndClickAddProduct(0);
@@ -67,7 +64,6 @@ public class CartTest extends BaseTest {
     @Test
     public void searchProductsAndVerifyCartAfterLogin(){
         User user = new User("nhung@gmail.com","1234567890");
-        HomePage homePage = new HomePage(driver);
         ProductPage productPage = homePage.clickProductButton();
         handleGoogleAdIfNeeded();
         productPage.searchProduct("dress");
@@ -88,7 +84,6 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addToCartFromRecommendedItems(){
-        HomePage homePage = new HomePage(driver);
         homePage.locateRecommendItem();
         homePage.addToCartByDynamic("Summer White Top");
         handleGoogleAdIfNeeded();

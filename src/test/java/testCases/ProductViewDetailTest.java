@@ -10,7 +10,6 @@ import pages.ProductViewDetailPage;
 public class ProductViewDetailTest extends BaseTest {
     @Test
     public void TestEditNumberOfProductInCart(){
-        HomePage homePage = new HomePage(driver);
         ProductViewDetailPage pr = homePage.viewDetailProduct("Sleeveless Unicorn Print Fit & Flare Net Dress - Multi");
         pr.editNumberOfProduct(4);
         CartPage cartPage = pr.moveToCartPage();
@@ -19,7 +18,6 @@ public class ProductViewDetailTest extends BaseTest {
     }
     @Test
     public  void addReviewOnProduct(){
-        HomePage homePage = new HomePage(driver);
         ProductViewDetailPage productViewDetailPage = homePage.viewDetailProduct("Sleeveless Dress");
         Assert.assertTrue(productViewDetailPage.isDisplayReviewSection(),"Khong co phan reivew");
         handleGoogleAdIfNeeded();
