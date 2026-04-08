@@ -12,24 +12,29 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import org.openqa.selenium.chrome.ChromeOptions;
+
 public class BaseTest {
     public WebDriver driver;
     HomePage homePage;
 
-
     @BeforeMethod
     public void setUp(){
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless"); 
+        options.addArguments("--headless");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--window-size=1920,1080");
+        
+        options.setPageLoadStrategy(org.openqa.selenium.PageLoadStrategy.EAGER); 
+        options.addArguments("--disable-extensions");
+        options.addArguments("--disable-gpu");
 
-        driver = new ChromeDriver(options); // Truyền options vào ChromeDriver
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5)); 
+        
         driver.navigate().to("https://automationexercise.com/");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         homePage = new HomePage(driver);
-        handleGoogleAdIfNeeded(); 
+        handleGoogleAdIfNeeded();
     }
 
     @AfterMethod
@@ -57,7 +62,6 @@ public class BaseTest {
             driver.switchTo().defaultContent();
         }
     }
-
 
 }
 
