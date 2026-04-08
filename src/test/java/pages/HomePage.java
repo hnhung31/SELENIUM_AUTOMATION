@@ -64,6 +64,8 @@ public class HomePage {
     }
 
     public ProductPage clickProductButton(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(btnProduct));
         driver.findElement(btnProduct).click();
         return new ProductPage(driver);
     }
