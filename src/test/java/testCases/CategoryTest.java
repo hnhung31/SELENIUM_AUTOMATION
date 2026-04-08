@@ -1,5 +1,9 @@
 package testCases;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+
 import bases.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,8 +15,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CategoryProductPage;
 import pages.HomePage;
-
 import java.time.Duration;
+
+@Epic("Automation Exercise Web")
+@Feature("Xem danh sách thể loại sản phẩm")
 
 public class CategoryTest extends BaseTest {
     @Test
@@ -30,3 +36,6 @@ public class CategoryTest extends BaseTest {
         Assert.assertEquals(categoryProductPage.getTitleCate(),"KIDS - TOPS & SHIRTS PRODUCTS","khong dc");
     }
 }
+
+
+

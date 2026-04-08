@@ -1,9 +1,15 @@
 package testCases;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+
 import bases.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
+@Epic("Automation Exercise Web")
+@Feature("Quản lý trang chủ")
 
 public class HomeTest extends BaseTest {
     @Test
@@ -30,3 +36,6 @@ public class HomeTest extends BaseTest {
         );
     }
 }
+
+
+

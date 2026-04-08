@@ -4,3 +4,4 @@ allure-report/
 .idea/
 *.iml
 .vscode/
+.allure/

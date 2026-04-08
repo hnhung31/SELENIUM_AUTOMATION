@@ -1,5 +1,9 @@
 package testCases;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+
 import bases.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -12,8 +16,9 @@ import org.testng.annotations.Test;
 import pages.CategoryProductPage;
 import pages.HomePage;
 import pages.ProductPage;
-
 import java.time.Duration;
+@Epic("Automation Exercise Web")
+@Feature("Quản lý sản phẩm")
 
 public class ProductTest extends BaseTest {
     @Test
@@ -55,3 +60,6 @@ public class ProductTest extends BaseTest {
     }
    
 }
+
+
+

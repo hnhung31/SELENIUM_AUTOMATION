@@ -1,11 +1,17 @@
 package testCases;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+
 import bases.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CartPage;
 import pages.HomePage;
 import pages.ProductViewDetailPage;
+@Epic("Automation Exercise Web")
+@Feature("Xem chi tiết sản phẩm và đánh giá sản phẩm")
 
 public class ProductViewDetailTest extends BaseTest {
     @Test
@@ -28,3 +34,6 @@ public class ProductViewDetailTest extends BaseTest {
 
     }
 }
+
+
+

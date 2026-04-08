@@ -1,5 +1,9 @@
 package testCases;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+
 import bases.BaseTest;
 import models.User;
 import org.openqa.selenium.By;
@@ -14,6 +18,8 @@ import pages.*;
 
 import java.io.File;
 import java.time.Duration;
+@Epic("Automation Exercise Web")
+@Feature("Quản lý đơn hàng")
 
 public class OrderTest extends BaseTest {
     @Test
@@ -75,3 +81,6 @@ public class OrderTest extends BaseTest {
         System.out.println("Testcase đã hoàn thành");
     }
 }
+
+
+

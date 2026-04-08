@@ -1,5 +1,9 @@
 package testCases;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+
 import bases.BaseTest;
 import models.User;
 import org.openqa.selenium.WebDriver;
@@ -7,6 +11,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
+@Epic("Automation Exercise Web")
+@Feature("Đăng xuất")
 
 public class LogOutTest extends BaseTest {
 
@@ -21,3 +27,6 @@ public class LogOutTest extends BaseTest {
             Assert.assertTrue(t.containLabelLogin(),"Khong the dang xuat");
         }
 }
+
+
+
