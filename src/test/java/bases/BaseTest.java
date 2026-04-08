@@ -24,6 +24,8 @@ public class BaseTest {
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--window-size=1920,1080");
+        options.addArguments("--disable-features=IsolateOrigins,site-per-process");
+        options.addArguments("--blink-settings=imagesEnabled=false"); 
         
         options.setPageLoadStrategy(org.openqa.selenium.PageLoadStrategy.EAGER); 
         options.addArguments("--disable-extensions");
