@@ -12,11 +12,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class LoginPage {
-    private WebDriver driver;
+public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver){
-        this.driver = driver;
+        super(driver);    
     }
 
     private By email = By.cssSelector("input[data-qa='login-email']");
@@ -31,36 +30,33 @@ public class LoginPage {
     private By lblEmailExist = By.xpath("//p[contains(text(),'Email Address already exist!']");
 
     public HomePage loginAction(User user){
-        driver.findElement(email).sendKeys(user.getEmail());
-        driver.findElement(password).sendKeys(user.getPassword());
-        driver.findElement(btnLogin).submit();
+        enterText(email, user.getEmail());
+        enterText(password, user.getPassword());    
+        clickElement(btnLogin);
         return new HomePage(driver);
     }
     public boolean isErrorMessage(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(textErrorLogin));
-        return driver.findElement(textErrorLogin).isDisplayed();
-    }
-
-    public RegisterPage signUpNewUser(User user){
-        driver.findElement(nameSignup).sendKeys(user.getName());
-        driver.findElement(emailSignup).sendKeys(user.getEmail());
-        driver.findElement(btnSignup).submit();
-        return new RegisterPage(driver);
-    }
-    public boolean containLabelLogin(){
         try {
-            WebElement loginLabel = driver.findElement(lblLogin);
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            wait.until(ExpectedConditions.visibilityOf(loginLabel));
-            return loginLabel.isDisplayed();
+            WebDriverWait longWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            longWait.until(ExpectedConditions.visibilityOfElementLocated(textErrorLogin));
+            return true;
         } catch (Exception e) {
             return false;
         }
     }
 
+    public RegisterPage signUpNewUser(User user){
+        enterText(nameSignup, user.getName());
+        enterText(emailSignup, user.getEmail());
+        clickElement(btnSignup);
+        return new RegisterPage(driver);
+    }
+    public boolean containLabelLogin(){
+        return isElementDisplayed(lblLogin);
+    }
+
     public boolean isEmailExist(){
-        return driver.findElement(lblEmailExist).isDisplayed();
+        return isElementDisplayed(lblEmailExist);
     }
 
 }

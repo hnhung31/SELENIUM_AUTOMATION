@@ -6,15 +6,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.JavascriptExecutor;
 
 import java.time.Duration;
 
-public class OrderPage {
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class OrderPage  extends BasePage {
     public OrderPage(WebDriver driver){
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+        super(driver);
     }
     private By addressDelivery = By.id("address_delivery");
     private By txtMessage = By.name("message");
@@ -24,25 +22,23 @@ public class OrderPage {
     private By addressBillingBlock = By.id("address_invoice");
 
     public boolean isDisplayAddress(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement addressElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("address_delivery")));
-        return driver.findElement(addressDelivery).isDisplayed();
+        return isElementDisplayed(addressDelivery);
     }
 
     public PaymentPage enterCommentAndPlaceOrder(String comment) {
-        driver.findElement(txtMessage).sendKeys(comment);
-        driver.findElement(btnPlaceOrder).click();
+        enterText(txtMessage, comment);
+        WebElement placeOrderLnk = wait.until(ExpectedConditions.presenceOfElementLocated(btnPlaceOrder));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", placeOrderLnk);
+        
         return new PaymentPage(driver);
     }
 
     public String getDeliveryAddressText() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(addressDeliveryBlock));
-        return driver.findElement(addressDeliveryBlock).getText();
+        return getTextElement(addressDeliveryBlock);
     }
 
     public String getBillingAddressText() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(addressBillingBlock));
-        return driver.findElement(addressBillingBlock).getText();
+        return getTextElement(addressBillingBlock);
     }
 
 
