@@ -5,11 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 import io.qameta.allure.Step;
-public class RegisterPage {
-    private WebDriver driver;
+public class RegisterPage extends BasePage {
 
     public RegisterPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     private By password = By.id("password");
@@ -25,17 +24,21 @@ public class RegisterPage {
 
     @Step("Registering new user with email: {0}")   
     public AccountCreatedPage registerNewUser(User user){
-        driver.findElement(password).sendKeys(user.getPassword());
-        driver.findElement(firstName).sendKeys(user.getFirstName());
-        driver.findElement(lastName).sendKeys(user.getLastName());
-        driver.findElement(address).sendKeys(user.getAddress());
+        enterText(password, user.getPassword());
+        enterText(firstName, user.getFirstName());
+        enterText(lastName, user.getLastName());
+        enterText(address, user.getAddress());
         Select selectCountry = new Select(driver.findElement(country));
         selectCountry.selectByValue(user.getCountry());
-        driver.findElement(state).sendKeys(user.getState());
-        driver.findElement(city).sendKeys(user.getCity());
-        driver.findElement(zipCode).sendKeys(user.getZipCode());
-        driver.findElement(phone).sendKeys(user.getPhone());
-        driver.findElement(btnCreateUser).submit();
+        enterText(state, user.getState());
+        enterText(city, user.getCity());
+        enterText(zipCode, user.getZipCode());
+        enterText(phone, user.getPhone());
+        
+        org.openqa.selenium.WebElement createBtn = wait.until(org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated(btnCreateUser));
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", createBtn);
+        ((org.openqa.selenium.JavascriptExecutor) driver).executeScript("arguments[0].click();", createBtn);
+        
         return new AccountCreatedPage(driver);
     }
 }

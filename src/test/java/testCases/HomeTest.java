@@ -1,15 +1,19 @@
 package testCases;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+
 import bases.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
+@Epic("Automation Exercise Web")
+@Feature("Quản lý trang chủ")
 
 public class HomeTest extends BaseTest {
     @Test
     public void testScrollUpUsingArrowButton() {
-        HomePage homePage = new HomePage(driver);
-
         homePage.scrollToBottom();
 
         homePage.clickScrollUpArrow();
@@ -23,16 +27,15 @@ public class HomeTest extends BaseTest {
 
     @Test
     public void testScrollUpWithoutArrowButton() {
-        HomePage homePage = new HomePage(driver);
-
         homePage.scrollToBottom();
-
         homePage.scrollToTopWithoutArrow();
 
         Assert.assertTrue(
-                homePage.isTopTextVisible(),
-                "Lỗi: Code cuộn lên thất bại, không thấy text ở đỉnh trang!"
+            homePage.isAtTopOfPage(),
+            "Scroll to top thất bại!"
         );
-        System.out.println("Test Case 26 Passed: Script cuộn trang hoạt động tốt!");
     }
 }
+
+
+

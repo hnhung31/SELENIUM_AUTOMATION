@@ -7,8 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class HomePage {
-    private  WebDriver driver;
+public class HomePage extends BasePage {
     private By lnkLogin = By.cssSelector("a[href='/login']");
     private By loggedAs = By.xpath("//li/a[contains(text(), 'Logged in as')]");
     private By lnkLogOut = By.cssSelector("a[href='/logout']");
@@ -29,117 +28,124 @@ public class HomePage {
     private By txtFullFledged = By.xpath("//h2[contains(text(),'Full-Fledged practice website')]");
 
     public HomePage(WebDriver driver){
-        this.driver = driver;
+        super(driver);
     }
 
     public LoginPage clickLoginPage(){
-        driver.findElement(lnkLogin).click();
+        WebElement loginLnk = wait.until(ExpectedConditions.presenceOfElementLocated(lnkLogin));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", loginLnk);
         return new LoginPage(driver);
     }
 
     public boolean isDisplayedUser() {
-        try {
-            WebElement loggedInUser = driver.findElement(loggedAs);
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-            wait.until(ExpectedConditions.visibilityOf(loggedInUser));
-            return loggedInUser.isDisplayed();
-        } catch (Exception e) {
-            return false;
-        }
+        return isElementDisplayed(loggedAs);
     }
 
     public LoginPage logOutAction(){
-        driver.findElement(lnkLogOut).click();
+        WebElement logoutLnk = wait.until(ExpectedConditions.presenceOfElementLocated(lnkLogOut));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", logoutLnk);
         return new LoginPage(driver);
     }
 
     public ContactUsPage clickContactUs(){
-        driver.findElement(btnContactUs).click();
+        WebElement contactLnk = wait.until(ExpectedConditions.presenceOfElementLocated(btnContactUs));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", contactLnk);
         return new ContactUsPage(driver);
     }
 
     public TestcasePage clickTestCaseButton(){
-        driver.findElement(btnTestcase).click();
+        WebElement testcaseLnk = wait.until(ExpectedConditions.presenceOfElementLocated(btnTestcase));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", testcaseLnk);
         return new TestcasePage(driver);
     }
 
     public ProductPage clickProductButton(){
-        driver.findElement(btnProduct).click();
+        WebDriverWait longWait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement productLnk = longWait.until(ExpectedConditions.visibilityOfElementLocated(btnProduct));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", productLnk);
         return new ProductPage(driver);
     }
 
     public void SubscriptionEmail(String email){
-        WebElement email1 = driver.findElement(txtSubscriptionEmail);
-
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true)",email1);
-
-        email1.sendKeys(email);
-        driver.findElement(btnSubscriptionEmail).click();
+        scrollToElement(txtSubscriptionEmail);
+        enterText(txtSubscriptionEmail, email);
+        clickElement(btnSubscriptionEmail);
     }
 
     public String handleNotiSubscriptionEmail(){
-        return driver.findElement(alertNotiSendEmail).getText();
+        return getTextElement(alertNotiSendEmail);
     }
 
     public CartPage clickCartButton(){
-        driver.findElement(btnCart).click();
+        WebDriverWait longWait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement cartLnk = longWait.until(ExpectedConditions.visibilityOfElementLocated(btnCart));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", cartLnk);
         return new CartPage(driver);
     }
 
     public ProductViewDetailPage viewDetailProduct(String name){
-        String locator = String.format("//p[text()='%s']/ancestor::div[@class='product-image-wrapper']//a[contains(text(),'View Product')]",name);
+        String locatorXpath = String.format("//p[text()='%s']/ancestor::div[@class='product-image-wrapper']//a[contains(text(),'View Product')]",name);
+        By locator = By.xpath(locatorXpath);
+        scrollToElement(locator);
+        
+        WebElement product = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebElement loca = driver.findElement(By.xpath(locator));
-        js.executeScript("arguments[0].scrollIntoView(true)",loca);
-        js.executeScript("arguments[0].click();",loca);
+        js.executeScript("arguments[0].click();", product);
+        
         return new ProductViewDetailPage(driver);
     }
 
     public void clickDeleteAccount() {
-        driver.findElement(menuDeleteAccount).click();
+        WebElement deleteLnk = wait.until(ExpectedConditions.presenceOfElementLocated(menuDeleteAccount));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", deleteLnk);
     }
 
     public boolean isDisplayedCategory(){
-        return driver.findElement(locaSideBar).isDisplayed();
+        return isElementDisplayed(locaSideBar);
     }
 
     public CategoryProductPage chooseCategory(String mainCate, String subCate){
         String dynamicXpath = String.format("//a[normalize-space()='%s']",mainCate);
-        WebElement mainLink = driver.findElement(By.xpath(dynamicXpath));
+        By mainLocator = By.xpath(dynamicXpath);
+        scrollToElement(mainLocator);
+        
+        WebElement mainLink = wait.until(ExpectedConditions.presenceOfElementLocated(mainLocator));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", mainLink);
 
         String dynamicSubCate = String.format("//div[@id='%s']//a[contains(text(),'%s')]",mainCate,subCate);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        WebElement subLink = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(dynamicSubCate)));
+        By subLocator = By.xpath(dynamicSubCate);
+        WebElement subLink = wait.until(ExpectedConditions.visibilityOfElementLocated(subLocator));
         js.executeScript("arguments[0].click();", subLink);
+        
         return new CategoryProductPage(driver);
     }
 
     public void locateRecommendItem(){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        WebElement t = driver.findElement(lblRecommendItem);
-        js.executeScript("arguments[0].scrollIntoView(true);",t);
-
+        scrollToElement(lblRecommendItem);
     }
 
     public void addToCartByDynamic(String productName){
         String dynamicProduct = String.format("//p[text()='%s']/ancestor::div[@class='product-image-wrapper']/ancestor::div[@class='carousel-inner']//a[@class='btn btn-default add-to-cart']",productName);
-        WebElement product = driver.findElement(By.xpath(dynamicProduct));
+        By locator = By.xpath(dynamicProduct);
+        scrollToElement(locator);
+        
+        WebElement product = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);",product);
-        js.executeScript("arguments[0].click();",product);
+        js.executeScript("arguments[0].click();", product);
     }
 
     public void continueShopping(){
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
         wait.until(ExpectedConditions.visibilityOfElementLocated(popUpAdded));
-        wait.until(ExpectedConditions.elementToBeClickable(btnContinueShopping)).click();
+        
+        WebElement continueBtn = wait.until(ExpectedConditions.presenceOfElementLocated(btnContinueShopping));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", continueBtn);
+        
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(popUpAdded));
     }
 
     public CartPage moveToCartPage(){
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(5));
         WebElement viewCartBtn = wait.until(ExpectedConditions.presenceOfElementLocated(lnkViewCart));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", viewCartBtn);
@@ -147,35 +153,39 @@ public class HomePage {
     }
 
     public void clickScrollUpButton(){
-        driver.findElement(btnScrollUp).click();
+        WebElement btn = wait.until(ExpectedConditions.visibilityOfElementLocated(btnScrollUp));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", btn);
     }
+
     public void scrollToBottom() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-
-        try { Thread.sleep(1000); } catch (InterruptedException e) {}
     }
+    
     public void clickScrollUpArrow() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", driver.findElement(btnScrollUp));
+        WebElement arrow = wait.until(ExpectedConditions.visibilityOfElementLocated(btnScrollUp));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", arrow);
     }
 
+    public boolean isAtTopOfPage() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Long scrollPosition = (Long) js.executeScript("return window.pageYOffset;");
+        return scrollPosition == 0;
+    }
+
+    public boolean isTopTextVisible() {
+        try {
+            WebDriverWait longWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+            return longWait.until(ExpectedConditions.visibilityOfElementLocated(txtFullFledged)).isDisplayed();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
     public void scrollToTopWithoutArrow() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, 0)");
     }
-
-    public boolean isTopTextVisible() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        try { Thread.sleep(1500); } catch (InterruptedException e) {}
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(txtFullFledged));
-        return driver.findElement(txtFullFledged).isDisplayed();
-    }
-
-
-
-
 }
 
 

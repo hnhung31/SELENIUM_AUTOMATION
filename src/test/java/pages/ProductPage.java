@@ -11,13 +11,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-public class ProductPage {
-    private WebDriver driver;
-    private WebDriverWait wait ;
+public class ProductPage extends BasePage {
 
     public ProductPage(WebDriver driver){
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        super(driver);
     }
 
     private By lbAllProduct = By.xpath("//h2[text()='All Products']");
@@ -27,11 +24,10 @@ public class ProductPage {
     private By cardProductDisplay = By.xpath("//div[@class='col-sm-4']");
 
     public boolean isDisplayAllProduct(){
-        return driver.findElement(lbAllProduct).isDisplayed();
+        return isElementDisplayed(lbAllProduct);
     }
 
     public ProductViewDetailPage viewProduct(int index){
-        wait =  new WebDriverWait(driver, Duration.ofSeconds(5));
         wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(btnViewProducts));
 
         List<WebElement> listProduct = driver.findElements(btnViewProducts);
@@ -48,21 +44,23 @@ public class ProductPage {
 
     public ProductViewDetailPage ProductViewDetailByXPathDynamic(String productName){
         String dynamicProduct = String.format("//p[text()='%s']/ancestor::div[@class='product-image-wrapper']//a[contains(text(),'View Product')]",productName);
-        WebElement product = driver.findElement(By.xpath(dynamicProduct));
+        By locator = By.xpath(dynamicProduct);
+        
+        WebElement product = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);",product);
-        js.executeScript("arguments[0].click();",product);
+        js.executeScript("arguments[0].scrollIntoView(true);", product);
+        js.executeScript("arguments[0].click();", product);
+        
         return new ProductViewDetailPage(driver);
     }
 
     public void searchProduct(String name){
-        driver.findElement(txtSearchProduct).sendKeys(name);
-        driver.findElement(btnSearch).click();
+        enterText(txtSearchProduct, name);
+        clickElement(btnSearch);
     }
 
     public boolean isDisplayedProduct(){
-        WebElement card = driver.findElement(cardProductDisplay);
-        return card.isDisplayed();
+        return isElementDisplayed(cardProductDisplay);
     }
 
     private By cartModalProduct = By.xpath("//div[@class='product-image-wrapper']");
@@ -85,21 +83,35 @@ public class ProductPage {
     }
     public void continueShopping(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(popUpAdded));
-        wait.until(ExpectedConditions.elementToBeClickable(btnContinueShopping)).click();
+        WebElement btnShop = wait.until(ExpectedConditions.presenceOfElementLocated(btnContinueShopping));
+        
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", btnShop); 
+        
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(popUpAdded));
     }
+    
     public CartPage moveToCartPage(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(popUpAdded));
         WebElement viewCartBtn = wait.until(ExpectedConditions.presenceOfElementLocated(lnkViewCart));
+        
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", viewCartBtn);
+        
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(popUpAdded));
         return new CartPage(driver);
     }
 
     public CategoryProductPage locateAndClickBrandProduct(String brand){
         String dynamicBrand = String.format("//div[@class='brands-name']//a[@href='/brand_products/%s']",brand);
-        WebElement xs = driver.findElement(By.xpath(dynamicBrand));
+        By locator = By.xpath(dynamicBrand);
+        
+        scrollToElement(locator);
+        
+        WebElement brandLink = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].scrollIntoView(true);",xs);
-        js.executeScript("arguments[0].click();",xs);
+        js.executeScript("arguments[0].click();", brandLink);
+        
         return new CategoryProductPage(driver);
     }
 

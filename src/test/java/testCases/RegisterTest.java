@@ -1,5 +1,9 @@
 package testCases;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+
 import bases.BaseTest;
 import models.User;
 import org.testng.Assert;
@@ -9,11 +13,9 @@ import pages.HomePage;
 import pages.LoginPage;
 import pages.RegisterPage;
 import io.qameta.allure.Description;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
-@Epic("Quản lý tài khoản")
-@Feature("Đăng ký")
+@Epic("Automation Exercise Web")
+@Feature("Quản lý chức năng đăng ký")
+
 public class RegisterTest extends BaseTest {
 
     @Test(priority = 1)
@@ -32,8 +34,10 @@ public class RegisterTest extends BaseTest {
     }
     @Test
     public void testRegisterWithEmailExist(){
-        HomePage homePage = new HomePage(driver);
         homePage.clickLoginPage();
 
     }
 }
+
+
+

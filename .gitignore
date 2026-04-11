@@ -1,1 +1,7 @@
-/target/
+target/
+allure-results/
+allure-report/
+.idea/
+*.iml
+.vscode/
+.allure/

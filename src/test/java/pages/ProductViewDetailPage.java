@@ -9,12 +9,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-public class ProductViewDetailPage {
-    private WebDriver driver;
-    WebDriverWait wait;
+public class ProductViewDetailPage extends BasePage {
     public ProductViewDetailPage(WebDriver driver){
-        this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        super(driver);
     }
     private By txtQuantityProduct = By.id("quantity");
     private By btnAddToCart = By.cssSelector(".cart");
@@ -24,17 +21,16 @@ public class ProductViewDetailPage {
     private By btnContinueShopping = By.xpath("//button[@data-dismiss='modal']");
 
     public void editNumberOfProduct(int number){
-        driver.findElement(txtQuantityProduct).clear();
-        driver.findElement(txtQuantityProduct).sendKeys(String.valueOf(number));
-        driver.findElement(btnAddToCart).click();
+        enterText(txtQuantityProduct, String.valueOf(number));
+        clickElement(btnAddToCart);
     }
     public void continueShopping(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(popUpAdded));
-        wait.until(ExpectedConditions.elementToBeClickable(btnContinueShopping)).click();
+        clickElement(btnContinueShopping);
     }
     public CartPage moveToCartPage(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(popUpAdded));
-        wait.until(ExpectedConditions.elementToBeClickable(lnkViewCart)).click();
+        clickElement(lnkViewCart);
         return new CartPage(driver);
     }
     private By lblWriteReview = By.xpath("//a[@data-toggle='tab']");
@@ -45,16 +41,16 @@ public class ProductViewDetailPage {
     private By lblReviewSuccess = By.xpath("//span[text()='Thank you for your review.']");
 
     public void clickAndEnterReview(String name, String email, String review){
-        driver.findElement(txtName).sendKeys(name);
-        driver.findElement(txtEmail).sendKeys(email);
-        driver.findElement(txtReview).sendKeys(review);
-        driver.findElement(btnSubmit).click();
+        enterText(txtName, name);
+        enterText(txtEmail, email);
+        enterText(txtReview, review);
+        clickElement(btnSubmit);
     }
 
     public boolean isDisplayReviewSection(){
-        return driver.findElement(lblWriteReview).isDisplayed();
+        return isElementDisplayed(lblWriteReview);
     }
     public String isDisplaySentReviewSuccessful(){
-        return driver.findElement(lblReviewSuccess).getText();
+        return getTextElement(lblReviewSuccess);
     }
 }

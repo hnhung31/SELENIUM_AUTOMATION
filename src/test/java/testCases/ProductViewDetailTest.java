@@ -1,16 +1,21 @@
 package testCases;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+
 import bases.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CartPage;
 import pages.HomePage;
 import pages.ProductViewDetailPage;
+@Epic("Automation Exercise Web")
+@Feature("Xem chi tiết sản phẩm và đánh giá sản phẩm")
 
 public class ProductViewDetailTest extends BaseTest {
     @Test
     public void TestEditNumberOfProductInCart(){
-        HomePage homePage = new HomePage(driver);
         ProductViewDetailPage pr = homePage.viewDetailProduct("Sleeveless Unicorn Print Fit & Flare Net Dress - Multi");
         pr.editNumberOfProduct(4);
         CartPage cartPage = pr.moveToCartPage();
@@ -19,7 +24,6 @@ public class ProductViewDetailTest extends BaseTest {
     }
     @Test
     public  void addReviewOnProduct(){
-        HomePage homePage = new HomePage(driver);
         ProductViewDetailPage productViewDetailPage = homePage.viewDetailProduct("Sleeveless Dress");
         Assert.assertTrue(productViewDetailPage.isDisplayReviewSection(),"Khong co phan reivew");
         handleGoogleAdIfNeeded();
@@ -30,3 +34,6 @@ public class ProductViewDetailTest extends BaseTest {
 
     }
 }
+
+
+

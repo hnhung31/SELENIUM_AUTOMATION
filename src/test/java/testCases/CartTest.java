@@ -1,5 +1,9 @@
 package testCases;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+
 import bases.BaseTest;
 import models.User;
 import org.openqa.selenium.By;
@@ -11,13 +15,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
-
 import java.time.Duration;
+
+@Epic("Automation Exercise Web")
+@Feature("Quản lý giỏ hàng")
 
 public class CartTest extends BaseTest {
     @Test
     public void SendSubscriptionEmail(){
-        HomePage homePage = new HomePage(driver);
         CartPage cartPage= homePage.clickCartButton();
         cartPage.SubscriptionEmail("h@gmail.com");
         Assert.assertEquals(cartPage.isDisplayedNotiSuccessful(),"You have been successfully subscribed!","Dang ki khong thanh cong");
@@ -25,7 +30,6 @@ public class CartTest extends BaseTest {
 
     @Test
     public void AddProductInCart(){
-        HomePage homePage = new HomePage(driver);
         ProductPage productPage = homePage.clickProductButton();
         handleGoogleAdIfNeeded();
         productPage.hoverAndClickAddProduct(2);
@@ -49,7 +53,6 @@ public class CartTest extends BaseTest {
     @Test
     public void removeProductsFromCart(){
         User user = new User("nhung@gmail.com","1234567890");
-        HomePage homePage = new HomePage(driver);
         ProductPage productPage = homePage.clickProductButton();
         handleGoogleAdIfNeeded();
         productPage.hoverAndClickAddProduct(0);
@@ -67,7 +70,6 @@ public class CartTest extends BaseTest {
     @Test
     public void searchProductsAndVerifyCartAfterLogin(){
         User user = new User("nhung@gmail.com","1234567890");
-        HomePage homePage = new HomePage(driver);
         ProductPage productPage = homePage.clickProductButton();
         handleGoogleAdIfNeeded();
         productPage.searchProduct("dress");
@@ -88,7 +90,6 @@ public class CartTest extends BaseTest {
 
     @Test
     public void addToCartFromRecommendedItems(){
-        HomePage homePage = new HomePage(driver);
         homePage.locateRecommendItem();
         homePage.addToCartByDynamic("Summer White Top");
         handleGoogleAdIfNeeded();
@@ -98,3 +99,6 @@ public class CartTest extends BaseTest {
 
     }
 }
+
+
+

@@ -1,5 +1,9 @@
 package testCases;
 
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+
 import bases.BaseTest;
 import models.User;
 import org.openqa.selenium.By;
@@ -14,17 +18,18 @@ import pages.*;
 
 import java.io.File;
 import java.time.Duration;
+@Epic("Automation Exercise Web")
+@Feature("Quản lý đơn hàng")
 
 public class OrderTest extends BaseTest {
     @Test
     public void placeOrderRegisterBeforeCheckout(){
         String dynamicEmail = "nhung" + System.currentTimeMillis() + "@gmail.com";
         User newUser = new User("Nhung", dynamicEmail, "123456", "Nhung", "Nguyen", "Q9", "India", "HCM", "HCM", "700000", "012345");
-        HomePage homePage = new HomePage(driver);
-        LoginPage loginPage = homePage.clickLoginPage();
-        RegisterPage registerPage = loginPage.signUpNewUser(newUser);
-        AccountCreatedPage accCrr = registerPage.registerNewUser(newUser);
-        Assert.assertTrue(accCrr.displayAccountCreatedPage(),"Đăng ký thành công nhưng không chuyển sang trang Account Created page");
+        Assert.assertTrue(homePage.clickLoginPage()
+                                    .signUpNewUser(newUser)
+                                    .registerNewUser(newUser)
+                                    .displayAccountCreatedPage(),"Đăng ký thành công nhưng không chuyển sang trang Account Created page");
         ProductPage productPage = homePage.clickProductButton();
         handleGoogleAdIfNeeded();
         productPage.hoverAndClickAddProduct(2);
@@ -47,11 +52,10 @@ public class OrderTest extends BaseTest {
     public void verifyAddressDetailsInCheckoutPage(){
         String name = "abc" + System.currentTimeMillis() + "@gmail.com";
         User newUser = new User("Nhung", name, "123456", "Nhung", "Nguyen", "Q9", "India", "HCM", "HCM", "700000", "012345");
-        HomePage homePage = new HomePage(driver);
-        LoginPage loginPage = homePage.clickLoginPage();
-        RegisterPage registerPage = loginPage.signUpNewUser(newUser);
-        AccountCreatedPage accCrr = registerPage.registerNewUser(newUser);
-        Assert.assertTrue(accCrr.displayAccountCreatedPage(),"Đăng ký thành công nhưng không chuyển sang trang Account Created page");
+        Assert.assertTrue(homePage.clickLoginPage()
+                                    .signUpNewUser(newUser)
+                                    .registerNewUser(newUser)
+                                    .displayAccountCreatedPage(),"Đăng ký thành công nhưng không chuyển sang trang Account Created page");
         ProductPage productPage = homePage.clickProductButton();
         productPage.hoverAndClickAddProduct(1);
         handleGoogleAdIfNeeded();
@@ -77,3 +81,6 @@ public class OrderTest extends BaseTest {
         System.out.println("Testcase đã hoàn thành");
     }
 }
+
+
+

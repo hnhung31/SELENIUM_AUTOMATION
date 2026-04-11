@@ -10,23 +10,22 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
-public class CartPage {
-    private WebDriver driver;
+public class CartPage extends BasePage {
 
     public CartPage(WebDriver driver){
-        this.driver = driver;
+        super(driver);
     }
 
     private By txtSubEmail = By.id("susbscribe_email");
     private By btnSubEmail = By.id("subscribe");
     private By alertNoti = By.xpath("//div[@class='alert-success alert']");
     public void SubscriptionEmail(String email){
-        driver.findElement(txtSubEmail).sendKeys(email);
-        driver.findElement(btnSubEmail).click();
+        enterText(txtSubEmail, email);
+        clickElement(btnSubEmail);
     }
 
     public String isDisplayedNotiSuccessful(){
-        return driver.findElement(alertNoti).getText();
+        return getTextElement(alertNoti);
     }
 
     private By cartRows = By.xpath("//tbody/tr");
@@ -72,9 +71,7 @@ public class CartPage {
     }
 
     public LoginPage clickRegisterLoginOnModal() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(modalCheckoutBefore));
-        driver.findElement(lnkRegisterOnModal).click();
+        clickElement(lnkRegisterOnModal);
         return new LoginPage(driver);
     }
 
