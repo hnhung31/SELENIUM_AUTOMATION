@@ -2,20 +2,12 @@ package testCases;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 
 import bases.BaseTest;
 import models.User;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
-import java.time.Duration;
 
 @Epic("Automation Exercise Web")
 @Feature("Quản lý giỏ hàng")
@@ -83,7 +75,7 @@ public class CartTest extends BaseTest {
         Assert.assertEquals(t,2, "Khong khop");
         LoginPage loginPage = homePage.clickLoginPage();
         handleGoogleAdIfNeeded();
-        loginPage.loginAction(user);
+        loginPage.loginActionSuccessful(user);
         cartPage = homePage.clickCartButton();
         Assert.assertEquals(t,2, "Khong khop");
     }

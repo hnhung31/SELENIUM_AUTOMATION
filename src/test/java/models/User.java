@@ -12,7 +12,6 @@ public class User {
     private String city;
     private String zipCode;
     private String phone;
-
     public User(String email, String password) {
         this.email = email;
         this.password = password;
