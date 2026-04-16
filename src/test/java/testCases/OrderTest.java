@@ -2,22 +2,13 @@ package testCases;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 
 import bases.BaseTest;
 import models.User;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.*;
 
-import java.io.File;
-import java.time.Duration;
 @Epic("Automation Exercise Web")
 @Feature("Quản lý đơn hàng")
 
@@ -27,7 +18,7 @@ public class OrderTest extends BaseTest {
         String dynamicEmail = "nhung" + System.currentTimeMillis() + "@gmail.com";
         User newUser = new User("Nhung", dynamicEmail, "123456", "Nhung", "Nguyen", "Q9", "India", "HCM", "HCM", "700000", "012345");
         Assert.assertTrue(homePage.clickLoginPage()
-                                    .signUpNewUser(newUser)
+                                    .signUpNewUserSuccessfulStep1(newUser)
                                     .registerNewUser(newUser)
                                     .displayAccountCreatedPage(),"Đăng ký thành công nhưng không chuyển sang trang Account Created page");
         ProductPage productPage = homePage.clickProductButton();
@@ -53,7 +44,7 @@ public class OrderTest extends BaseTest {
         String name = "abc" + System.currentTimeMillis() + "@gmail.com";
         User newUser = new User("Nhung", name, "123456", "Nhung", "Nguyen", "Q9", "India", "HCM", "HCM", "700000", "012345");
         Assert.assertTrue(homePage.clickLoginPage()
-                                    .signUpNewUser(newUser)
+                                    .signUpNewUserSuccessfulStep1(newUser)
                                     .registerNewUser(newUser)
                                     .displayAccountCreatedPage(),"Đăng ký thành công nhưng không chuyển sang trang Account Created page");
         ProductPage productPage = homePage.clickProductButton();

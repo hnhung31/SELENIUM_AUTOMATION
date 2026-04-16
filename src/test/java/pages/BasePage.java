@@ -33,6 +33,7 @@ public class BasePage {
         WebElement element = driver.findElement(locator);
         element.clear();
         element.sendKeys(text);
+        wait.until(driver -> element.getAttribute("value").equals(text));
     }
 
     protected String getTextElement(By locator) {
