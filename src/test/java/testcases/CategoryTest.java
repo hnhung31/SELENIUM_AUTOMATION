@@ -1,21 +1,13 @@
-package testCases;
+package testcases;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 
 import bases.BaseTest;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CategoryProductPage;
 import pages.HomePage;
-import java.time.Duration;
 
 @Epic("Automation Exercise Web")
 @Feature("Xem danh sách thể loại sản phẩm")

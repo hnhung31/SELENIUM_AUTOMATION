@@ -3,17 +3,17 @@
 <suite name="AutomationExercise Suite" parallel="classes" thread-count="4">
     <test verbose="2" preserve-order="true" name="All Test Cases">
         <classes>
-            <class name="testCases.CartTest"/>
-            <class name="testCases.CategoryTest"/>
-            <class name="testCases.ContactUsTest"/>
-            <class name="testCases.HomeTest"/>
-            <class name="testCases.LoginTest"/>
-            <class name="testCases.LogOutTest"/>
-            <class name="testCases.OrderTest"/>
-            <class name="testCases.ProductTest"/>
-            <class name="testCases.ProductViewDetailTest"/>
-            <class name="testCases.RegisterTest"/>
-            <class name="testCases.TestcaseTest"/>
+            <class name="testcases.CartTest"/>
+            <class name="testcases.CategoryTest"/>
+            <class name="testcases.ContactUsTest"/>
+            <class name="testcases.HomeTest"/>
+            <class name="testcases.LoginTest"/>
+            <class name="testcases.LogOutTest"/>
+            <class name="testcases.OrderTest"/>
+            <class name="testcases.ProductTest"/>
+            <class name="testcases.ProductViewDetailTest"/>
+            <class name="testcases.RegisterTest"/>
+            <class name="testcases.TestcaseTest"/>
         </classes>
     </test>
 </suite>

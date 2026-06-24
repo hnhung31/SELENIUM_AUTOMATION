@@ -26,7 +26,9 @@ public class ContactUsPage extends BasePage {
         enterText(txtEmail, contactUs.getEmail());
         enterText(txtSubject, contactUs.getSubject());
         enterText(txtMessage, contactUs.getMessage());
-        driver.findElement(iconUpload).sendKeys(contactUs.getUploadFile());
+        if (contactUs.getUploadFile() != null && !contactUs.getUploadFile().isEmpty()) {
+            driver.findElement(iconUpload).sendKeys(contactUs.getUploadFile());
+        }
         scrollToElement(btnSubmit);
         clickElement(btnSubmit);
         return new ContactUsPage(driver);

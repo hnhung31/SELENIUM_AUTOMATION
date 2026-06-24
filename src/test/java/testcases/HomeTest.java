@@ -1,13 +1,12 @@
-package testCases;
+package testcases;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 
 import bases.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.HomePage;
+
 @Epic("Automation Exercise Web")
 @Feature("Quản lý trang chủ")
 
@@ -22,7 +21,6 @@ public class HomeTest extends BaseTest {
                 homePage.isTopTextVisible(),
                 "Lỗi: Dùng mũi tên cuộn lên thất bại, không thấy text ở đỉnh trang!"
         );
-        System.out.println("Test Case 25 Passed: Nút mũi tên hoạt động tốt!");
     }
 
     @Test

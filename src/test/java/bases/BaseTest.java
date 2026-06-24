@@ -33,7 +33,7 @@ public class BaseTest {
         options.addArguments("--disable-gpu");
 
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5)); 
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         
         driver.navigate().to("https://automationexercise.com/");
         homePage = new HomePage(driver);

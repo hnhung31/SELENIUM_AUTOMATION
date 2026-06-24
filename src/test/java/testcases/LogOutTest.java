@@ -1,6 +1,6 @@
-package testCases;
+package testcases;
 
-import dataProvider.LoginData;
+import dataprovider.LoginData;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 

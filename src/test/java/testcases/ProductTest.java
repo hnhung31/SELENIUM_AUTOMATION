@@ -1,22 +1,15 @@
-package testCases;
+package testcases;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 
 import bases.BaseTest;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CategoryProductPage;
 import pages.HomePage;
 import pages.ProductPage;
-import java.time.Duration;
+
 @Epic("Automation Exercise Web")
 @Feature("Quản lý sản phẩm")
 
@@ -40,7 +33,7 @@ public class ProductTest extends BaseTest {
                 .ProductViewDetailByXPathDynamic("Fancy Green Top");
     }
 
-    /*@Test
+    @Test
     public void searchProductByName(){
         HomePage homePage = new HomePage(driver);
         ProductPage productPage = homePage.clickProductButton();
@@ -48,7 +41,7 @@ public class ProductTest extends BaseTest {
         productPage.searchProduct("Men tshirt");
 
         Assert.assertTrue(productPage.isDisplayedProduct(),"Khong hien product sau khi tim kiem");
-    }*/
+    }
 
     @Test
     public void ViewCartBrandProducts(){

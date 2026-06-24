@@ -1,17 +1,14 @@
-package testCases;
+package testcases;
 
-import dataProvider.LoginData;
+import dataprovider.LoginData;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 
 import bases.BaseTest;
 import models.User;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.HomePage;
 import pages.LoginPage;
 
 
@@ -21,7 +18,7 @@ import pages.LoginPage;
 public class LoginTest extends BaseTest {
 
     @Test(dataProvider = "loginDataSuccessful", dataProviderClass = LoginData.class)
-   public void testLoginSuccessfu(User user){
+    public void testLoginSuccessful(User user){
         LoginPage loginPage = homePage.clickLoginPage();
         loginPage.loginActionSuccessful(user);
         Assert.assertTrue(homePage.isDisplayedUser(),"Khong login thanh cong");

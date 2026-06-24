@@ -1,8 +1,5 @@
-package testCases;
+package testcases;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;

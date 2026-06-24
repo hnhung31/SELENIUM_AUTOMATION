@@ -1,6 +1,6 @@
-package testCases;
+package testcases;
 
-import dataProvider.RegisterData;
+import dataprovider.RegisterData;
 import io.qameta.allure.*;
 
 import bases.BaseTest;
@@ -16,7 +16,7 @@ import pages.RegisterPage;
 @Epic("Automation Exercise Web")
 @Feature("Quản lý chức năng đăng ký")
 public class RegisterTest extends BaseTest {
-    @Test(priority = 1, dataProvider = "registerSuccessful", dataProviderClass = RegisterData.class)
+    @Test( dataProvider = "registerSuccessful", dataProviderClass = RegisterData.class)
     @Description("1. Launch browser\n" +
             "2. Navigate to url 'http://automationexercise.com'\n" +
             "3. Verify that home page is visible successfully\n" +
@@ -46,7 +46,7 @@ public class RegisterTest extends BaseTest {
     public void testSignupInvalidPage1(User user, String errorField, String message){
         LoginPage loginPage=homePage.clickLoginPage();
         handleGoogleAdIfNeeded();
-        RegisterPage registerPage = loginPage.signUpNewUserSuccessfulStep1(user);
+        loginPage.signUpNewUserUnSuccessful(user);
         String messageError="";
         switch (errorField){
             case "name":

@@ -1,13 +1,11 @@
-package testCases;
+package testcases;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 
 import bases.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.HomePage;
 import pages.TestcasePage;
 @Epic("Automation Exercise Web")
 @Feature("Tính năng Testcase")

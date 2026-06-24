@@ -32,7 +32,7 @@ src/
  │    │    ├── bases/         # BaseTest configurations (WebDriver setup, teardown)
  │    │    ├── models/        # POJO classes for Data holding (User, ContactUs)
  │    │    ├── pages/         # Page Object classes (Locators and Actions)
- │    │    └── testCases/     # TestNG Test classes containing test assertions
+ │    │    └── testcases/     # TestNG Test classes containing test assertions
  │    └── resources/          # Test data, configuration files, XML runners
  ├── pom.xml                  # Maven dependencies and build configurations
  └── testng.xml               # TestNG suite runner file
