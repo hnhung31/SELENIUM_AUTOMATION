@@ -40,7 +40,6 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return driver.findElement(locator).getText();
     }
-
   
     protected boolean isElementDisplayed(By locator) {
         try {
@@ -56,4 +55,5 @@ public class BasePage {
         WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
     }
+    
 }
